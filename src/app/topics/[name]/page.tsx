@@ -13,7 +13,7 @@ export default async function TopicShowPage({ params }: TopicShowPageType) {
         <h1>top post</h1>
       </div>
       <div>
-        <PostCreateForm />
+        <PostCreateForm name={name}/>
       </div>
     </div>
   )

@@ -1,7 +1,11 @@
 'use client'
 import { Button, Popover, PopoverTrigger, PopoverContent, Input, Textarea } from '@nextui-org/react'
 
-export default function PostCreateForm() {
+interface PostCreateFormProps {
+  name: string
+}
+export default function PostCreateForm({name}: PostCreateFormProps) {
+  console.log("🚀 ~ PostCreateForm ~ name:", name)
 
   return (
     <Popover placement='left'>
