@@ -1,6 +1,19 @@
 import { prisma } from "..";
+import type { Post } from "@prisma/client";
 
-export function fetchPostsByTopicName(name: string) {
+export type PostWithData = {
+  topic: {
+    name: string;
+  } | null;
+  User: {
+      name: string | null;
+  } | null;
+  _count: {
+      comments: number;
+  };
+} & Post;
+
+export function fetchPostsByTopicName(name: string): Promise<PostWithData[]> {
   return prisma.post.findMany({
     where: {
       topic: {
