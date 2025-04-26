@@ -7,6 +7,7 @@ export type PostWithData = {
   } | null;
   User: {
       name: string | null;
+      image?: string | null;
   } | null;
   _count: {
       comments: number;
@@ -33,6 +34,35 @@ export function fetchPostsByTopicName(name: string): Promise<PostWithData[]> {
       },
       _count: {
         select: { // 帖子下面评论的数量
+          comments: true
+        }
+      }
+    }
+  })
+}
+
+export function fetchTopPosts(): Promise<PostWithData[]> {
+  return prisma.post.findMany({
+    orderBy: [{
+      comments: {
+        _count: 'desc'
+      }
+    }],
+    take: 5,
+    include: {
+      User: {
+        select: {
+          name: true,
+          image: true
+        }
+      },
+      topic: {
+        select: {
+          name: true,
+        }
+      },
+      _count: {
+        select: {
           comments: true
         }
       }
