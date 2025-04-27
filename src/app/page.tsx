@@ -9,8 +9,8 @@ export default async function Page() {
   return (
     <div className='flex justify-between'>
       <div>
-        <h1>top post</h1>
-        <PostList posts={posts}/>
+        <h1 className='text-2xl'>Top Posts</h1>
+        <PostList posts={posts} />
       </div>
       <div>
         <TopicCreateForm />
