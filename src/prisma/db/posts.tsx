@@ -69,3 +69,11 @@ export function fetchTopPosts(): Promise<PostWithData[]> {
     }
   })
 }
+
+export function findPostById(postId: string) {
+  return prisma.post.findFirst({
+    where: {
+      id: postId
+    }
+  })
+}
