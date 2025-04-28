@@ -6,19 +6,19 @@ import * as actions from '@/actions'
 interface PostCreateFormProps {
   name: string
 }
-export default function PostCreateForm({name}: PostCreateFormProps) {
-  
-    const [state, formAction, isPending] = useActionState(actions.createPost.bind(null, name), {
-      errors: {}
+export default function PostCreateForm({ name }: PostCreateFormProps) {
+
+  const [state, formAction, isPending] = useActionState(actions.createPost.bind(null, name), {
+    errors: {}
+  })
+
+  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault()
+    const formData = new FormData(e.target as HTMLFormElement)
+    startTransition(() => {
+      formAction(formData)
     })
-  
-    function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-      e.preventDefault()
-      const formData = new FormData(e.target as HTMLFormElement)
-      startTransition(() => {
-        formAction(formData)
-      })
-    }
+  }
 
   return (
     <Popover placement='left'>
@@ -48,7 +48,7 @@ export default function PostCreateForm({name}: PostCreateFormProps) {
                 {state.errors._form.join(',')}
               </Chip> :
               null
-            }          
+            }
             <Button type='submit' isLoading={isPending}>Submit</Button>
           </div>
         </form>
