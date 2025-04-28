@@ -22,7 +22,7 @@ export default async function PostDetail({ params }: PostDetailType) {
       </Suspense>
       <CommentCreateForm postId={postId} />
 
-      <CommentList />
+      <CommentList postId={postId} />
     </div>
   )
 }
