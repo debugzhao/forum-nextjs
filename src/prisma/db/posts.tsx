@@ -49,7 +49,7 @@ export function fetchTopPosts(): Promise<PostWithData[]> {
       }
     }],
     take: 5,
-    include: {
+    include: { 
       User: {
         select: {
           name: true,

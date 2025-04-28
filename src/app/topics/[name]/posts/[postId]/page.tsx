@@ -1,4 +1,5 @@
 import CommentCreateForm from '@/components/comments/comment-create-form'
+import CommentList from '@/components/comments/comment-list'
 import PostShow from '@/components/posts/post-show'
 import PostShowLoading from '@/components/posts/post-show-loading'
 import { Suspense } from 'react'
@@ -20,6 +21,8 @@ export default async function PostDetail({ params }: PostDetailType) {
         <PostShow postId={postId} />
       </Suspense>
       <CommentCreateForm postId={postId} />
+
+      <CommentList />
     </div>
   )
 }
