@@ -2,6 +2,7 @@ import React from 'react'
 import Image from 'next/image'
 import { CommentWithUser } from '@/prisma/db/comment'
 import dayjs from 'dayjs'
+import CommentCreateForm from './comment-create-form'
 
 
 export default function CommentShow({ comment }: { comment: CommentWithUser }) {
@@ -16,12 +17,14 @@ export default function CommentShow({ comment }: { comment: CommentWithUser }) {
           height={40}
           className='w-10 h-10 rounded-full'
         />
-        <div className='flex-1'>
+        <div className='flex-1 space-y-3'>
           <p className='text-sm font-medium text-gray-500'>{comment.User?.name}</p>
           <p className='flex justify-between items-center'>
             <span className='flex-1 text-gray-900'>{comment.content}</span>
             <span className='w-[150px] text-right text-gray-400 text-sm'>{dayjs(comment.createdAt).format('YYYY/M/D H:m:s')}</span>
           </p>
+
+          <CommentCreateForm postId={comment.postId || ''} />
         </div>
       </div>
     </div>

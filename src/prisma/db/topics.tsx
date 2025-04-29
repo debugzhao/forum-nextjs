@@ -11,3 +11,20 @@ export const fetchTopics = async () => {
     }
   })
 }
+
+/**
+ * 根据postId查询其关联的topic数据
+ * @param postId
+ * @returns
+ */
+export function findTopicByPostId(postId: string) {
+  return prisma.topic.findFirst({
+    where: {
+      posts: {
+        some: {
+          id: postId
+        }
+      }
+    },
+  })
+}
