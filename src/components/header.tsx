@@ -7,6 +7,7 @@ import {
 } from "@nextui-org/react";
 import HeaderAuth from "./header-auth";
 import Link from "next/link";
+import SearchInput from "./search-input";
 
 export const AcmeLogo = () => {
   return (
@@ -32,7 +33,7 @@ export default async function Header() {
       </NavbarBrand>
       <NavbarContent className="hidden sm:flex gap-4" justify="center">
         <NavbarItem>
-          <Input />
+          <SearchInput />
         </NavbarItem>
       </NavbarContent>
       <NavbarContent justify="end">

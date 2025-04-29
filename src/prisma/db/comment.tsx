@@ -1,3 +1,4 @@
+import { cache } from "react";
 import { prisma } from "..";
 import type { Comment } from "@prisma/client";
 
@@ -10,21 +11,23 @@ export type CommentWithUser = {
 } & Comment
 
 // 根据创建时间倒序排序
-export function fetchCommentByPostId(postId: string): Promise<CommentWithUser[]> {
-  return prisma.comment.findMany({
-    where: {
-      postId
-    },
-    include: {
-      User: {
-        select: {
-          name: true,
-          image: true
+export const fetchCommentByPostId = cache(
+  (postId: string): Promise<CommentWithUser[]> => {
+    return prisma.comment.findMany({
+      where: {
+        postId
+      },
+      include: {
+        User: {
+          select: {
+            name: true,
+            image: true
+          }
         }
+      },
+      orderBy: {
+        createdAt: 'desc'
       }
-    },
-    orderBy: {
-      createdAt: 'desc'
-    }
-  })
-}
+    })
+  }
+)
