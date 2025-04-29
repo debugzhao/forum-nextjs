@@ -9,13 +9,14 @@ interface CommentListProps {
 export default async function CommentList({ postId }: CommentListProps) {
 
   const commentList = await fetchCommentByPostId(postId)
+  const topLevelComment = commentList.filter(comment => comment.parentId === null)
   console.log('commentList', commentList)
 
   return (
     <div className='space-y-3'>
       <h1 className='text-lg font-bold'>All 20 comments</h1>
       {
-        commentList.map(comment => <CommentShow key={comment.id} comment={comment} />)
+        topLevelComment.map(comment => <CommentShow key={comment.id} comment={comment} />)
       }
     </div>
   )

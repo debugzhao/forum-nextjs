@@ -6,11 +6,12 @@ import * as actions from '@/actions/create-comment'
 
 interface CommentCreateFormProps {
   postId: string,
-  isOpen?: boolean
+  isOpen?: boolean,
+  parentId?: string
 }
 
-export default function CommentCreateForm({ postId, isOpen }: CommentCreateFormProps) {
-  const [state, formAction, isPending] = useActionState(actions.createComment.bind(null, { postId }), {
+export default function CommentCreateForm({ postId, isOpen, parentId }: CommentCreateFormProps) {
+  const [state, formAction, isPending] = useActionState(actions.createComment.bind(null, { postId, parentId: parentId || '' }), {
     errors: {}
   })
 

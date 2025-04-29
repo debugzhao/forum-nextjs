@@ -1,11 +1,13 @@
 import React from 'react'
 import Image from 'next/image'
-import { CommentWithUser } from '@/prisma/db/comment'
+import { CommentWithUser, fetchCommentByPostId } from '@/prisma/db/comment'
 import dayjs from 'dayjs'
 import CommentCreateForm from './comment-create-form'
+import { th } from 'framer-motion/client'
 
 
-export default function CommentShow({ comment }: { comment: CommentWithUser }) {
+export default async function CommentShow({ comment }: { comment: CommentWithUser }) {
+  const comments = await fetchCommentByPostId(comment.postId || '')
 
   return (
     <div className='border mt-2 p-4 rounded'>
@@ -24,9 +26,15 @@ export default function CommentShow({ comment }: { comment: CommentWithUser }) {
             <span className='w-[150px] text-right text-gray-400 text-sm'>{dayjs(comment.createdAt).format('YYYY/M/D H:m:s')}</span>
           </p>
 
-          <CommentCreateForm postId={comment.postId || ''} />
+          <CommentCreateForm postId={comment.postId || ''} parentId={comment.id} />
         </div>
       </div>
+
+      {
+        comments
+          .filter(item => item.parentId === comment.id)
+          .map(comment => <CommentShow key={comment.id} comment={comment} />)
+      }
     </div>
   )
 }

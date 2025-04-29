@@ -21,7 +21,7 @@ const rule = z.object({
 })
 
 export async function createComment(
-  { postId }: { postId: string },
+  { postId, parentId }: { postId: string, parentId: string },
   prevState: CreateCommentFormState,
   formData: FormData): Promise<CreateCommentFormState> {
 
@@ -49,7 +49,8 @@ export async function createComment(
       data: {
         content: result.data.content,
         userId: session.user.id!,
-        postId
+        postId,
+        parentId
       }
     })
   } catch (error) {

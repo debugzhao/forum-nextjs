@@ -20,7 +20,7 @@ export default async function PostDetail({ params }: PostDetailType) {
       <Suspense fallback={<PostShowLoading />}>
         <PostShow postId={postId} />
       </Suspense>
-      <CommentCreateForm postId={postId} isOpen/>
+      <CommentCreateForm postId={postId} isOpen />
 
       <CommentList postId={postId} />
     </div>
