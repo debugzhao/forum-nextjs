@@ -1,3 +1,4 @@
+import { fetchPostBySearchValue } from '@/prisma/db/posts'
 import { redirect } from 'next/navigation'
 import React from 'react'
 
@@ -10,6 +11,10 @@ export default async function Page({ searchParams }: SearchPageProps) {
   if (!name) {
     redirect('/')
   }
+
+  const posts = await fetchPostBySearchValue(name)
+  console.log(posts)
+
   return (
     <div>
       {name}

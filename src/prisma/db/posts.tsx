@@ -6,11 +6,11 @@ export type PostWithData = {
     name: string;
   } | null;
   User: {
-      name: string | null;
-      image?: string | null;
+    name: string | null;
+    image?: string | null;
   } | null;
   _count: {
-      comments: number;
+    comments: number;
   };
 } & Post;
 
@@ -49,7 +49,7 @@ export function fetchTopPosts(): Promise<PostWithData[]> {
       }
     }],
     take: 5,
-    include: { 
+    include: {
       User: {
         select: {
           name: true,
@@ -74,6 +74,48 @@ export function findPostById(postId: string) {
   return prisma.post.findFirst({
     where: {
       id: postId
+    }
+  })
+}
+
+/**
+ * 根据搜索值(帖子title or 帖子内容)查询帖子
+ * @param searchValue
+ * @returns
+ */
+export function fetchPostBySearchValue(searchValue: string) {
+  return prisma.post.findMany({
+    where: {
+      OR: [
+        {
+          title: {
+            contains: searchValue
+          }
+        },
+        {
+          content: {
+            contains: searchValue
+          }
+        }
+      ]
+    },
+    include: {
+      User: {
+        select: {
+          name: true,
+          image: true
+        }
+      },
+      topic: {
+        select: {
+          name: true,
+        }
+      },
+      _count: {
+        select: {
+          comments: true
+        }
+      }
     }
   })
 }
