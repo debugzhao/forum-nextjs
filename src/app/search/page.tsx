@@ -1,3 +1,4 @@
+import PostList from '@/components/posts/post-list'
 import { fetchPostBySearchValue } from '@/prisma/db/posts'
 import { redirect } from 'next/navigation'
 import React from 'react'
@@ -16,8 +17,6 @@ export default async function Page({ searchParams }: SearchPageProps) {
   console.log(posts)
 
   return (
-    <div>
-      {name}
-    </div>
+    <PostList posts={posts} />
   )
 }
