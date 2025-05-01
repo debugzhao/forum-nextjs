@@ -8,6 +8,7 @@ import {
 import HeaderAuth from "./header-auth";
 import Link from "next/link";
 import SearchInput from "./search-input";
+import ThemeSwitch from "./theme-switcher";
 
 export const AcmeLogo = () => {
   return (
@@ -24,7 +25,7 @@ export const AcmeLogo = () => {
 
 export default async function Header() {
   return (
-    <Navbar className="border-b-1 border-gray-200">
+    <Navbar className="shadow-md dark:shadow-purple-800">
       <NavbarBrand>
         <Link href={"/"} className="flex items-center ml-[-10px]">
           <AcmeLogo />
@@ -37,6 +38,7 @@ export default async function Header() {
         </NavbarItem>
       </NavbarContent>
       <NavbarContent justify="end">
+        <ThemeSwitch />
         <HeaderAuth />
       </NavbarContent>
     </Navbar>
