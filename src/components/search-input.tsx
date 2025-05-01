@@ -1,7 +1,7 @@
 'use client'
 
 import { Input } from '@nextui-org/react'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import * as actions from '@/actions'
 import { useSearchParams } from 'next/navigation'
 
@@ -9,13 +9,16 @@ export default function SearchInput() {
   const searchParams = useSearchParams()
   const [valueState, setValueState] = useState(searchParams.get('name') || '')
 
-
+  // useEffect监听searchParams变化
+  useEffect(() => {
+    setValueState(searchParams.get('name') || '')
+  }, [searchParams])
   return (
     <div className="w-[200px] rounded-2xl flex justify-center items-center bg-gradient-to-tr from-purple-200 to-white-500 text-white shadow-lg">
       <form action={actions.search}>
         <Input
           value={valueState}
-          onChange={(e) => { setValueState(e.target.value) }}
+          onChange={e => { setValueState(e.target.value) }}
           name='name'
           isClearable
           classNames={{
