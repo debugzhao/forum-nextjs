@@ -1,8 +1,8 @@
 'use server'
 import { auth } from '@/auth'
 import { prisma } from '@/prisma'
-import { sleep } from '@/utils'
 import { Topic } from '@prisma/client'
+import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
 import { z } from 'zod' // 表单校验
 
@@ -19,10 +19,10 @@ const rule = z.object({
   content: z.string().min(5).max(1000),
 })
 
-export async function createTopic(prevState: CreateTopicFormState, formData: FormData) : Promise<CreateTopicFormState> {
+export async function createTopic(prevState: CreateTopicFormState, formData: FormData): Promise<CreateTopicFormState> {
 
   const title = formData.get('title')
-  const content  = formData.get('content')
+  const content = formData.get('content')
 
   const result = rule.safeParse({ title, content })
   if (!result.success) {
@@ -67,8 +67,11 @@ export async function createTopic(prevState: CreateTopicFormState, formData: For
     }
   }
 
+  // 重新验证首页缓存
+  // revalidatePath('/')
+
   // 添加成功则跳转到详情页面
-  redirect(`/topics/${topic.name}`)
+  redirect(`/topics/${encodeURIComponent(topic.name)}`)
 
   return {
     errors: {}

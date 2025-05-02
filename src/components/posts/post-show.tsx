@@ -1,5 +1,4 @@
 import { findPostById } from '@/prisma/db/posts'
-import { sleep } from '@/utils'
 import { notFound } from 'next/navigation'
 
 interface PostShowProps {
@@ -7,7 +6,6 @@ interface PostShowProps {
 }
 
 export default async function PostShow({ postId }: PostShowProps) {
-  await sleep(2000)
   const post = await findPostById(postId)
   if (!post) {
     notFound()

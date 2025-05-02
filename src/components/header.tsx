@@ -3,12 +3,12 @@ import {
   NavbarBrand,
   NavbarContent,
   NavbarItem,
-  Input,
 } from "@nextui-org/react";
 import HeaderAuth from "./header-auth";
 import Link from "next/link";
 import SearchInput from "./search-input";
 import ThemeSwitch from "./theme-switcher";
+import { Suspense } from "react";
 
 export const AcmeLogo = () => {
   return (
@@ -34,7 +34,9 @@ export default async function Header() {
       </NavbarBrand>
       <NavbarContent className="hidden sm:flex gap-4" justify="center">
         <NavbarItem>
-          <SearchInput />
+          <Suspense>
+            <SearchInput />
+          </Suspense>
         </NavbarItem>
       </NavbarContent>
       <NavbarContent justify="end">

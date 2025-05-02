@@ -1,6 +1,5 @@
-import { prisma } from '@/prisma'
 import { fetchTopics } from '@/prisma/db/topics'
-import { Badge, Chip, menuItem } from '@nextui-org/react'
+import { Badge, Chip } from '@nextui-org/react'
 import Link from 'next/link'
 import React from 'react'
 
@@ -14,8 +13,6 @@ export const ListBoxWrapper = ({ children }: { children: React.ReactNode }) => {
 
 export default async function TopicList() {
   const topicList = await fetchTopics()
-
-  console.log(topicList)
 
   return (
     <ListBoxWrapper>

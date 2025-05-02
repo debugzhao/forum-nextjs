@@ -14,7 +14,6 @@ export default async function Page({ searchParams }: SearchPageProps) {
   }
 
   const posts = await fetchPostBySearchValue(name)
-  console.log(posts)
 
   return (
     <PostList posts={posts} />

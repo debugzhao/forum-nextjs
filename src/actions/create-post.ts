@@ -43,7 +43,6 @@ export async function createPost(
     }
   }
 
-  console.log('name', name)
   // 从数据库中根据topicName查询topicId
   const topic = await prisma.topic.findFirst({
     where: {

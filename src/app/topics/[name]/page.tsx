@@ -11,10 +11,8 @@ interface TopicShowPageType {
 
 export default async function TopicShowPage({ params }: TopicShowPageType) {
   const { name } = await params
-  console.log("🚀 ~ TopicShowPage ~ name:", name)
 
   const postListRsp = await fetchPostsByTopicName(name)
-  console.log("🚀 ~ TopicShowPage ~ postListRsp:", postListRsp)
 
   return (
     <div className='flex justify-between'>

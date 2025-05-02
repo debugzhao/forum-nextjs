@@ -5,15 +5,15 @@ import PostShowLoading from '@/components/posts/post-show-loading'
 import { Suspense } from 'react'
 
 interface PostDetailType {
-  params: {
+  params: Promise<{
     name: string
     postId: string
-  }
+  }>
 }
 
 export default async function PostDetail({ params }: PostDetailType) {
   // 获取路由参数
-  const { name, postId } = await params
+  const { postId } = await params
 
   return (
     <div className='space-y-3'>

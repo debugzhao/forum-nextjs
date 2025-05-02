@@ -10,7 +10,6 @@ export default async function CommentList({ postId }: CommentListProps) {
 
   const commentList = await fetchCommentByPostId(postId)
   const topLevelComment = commentList.filter(comment => comment.parentId === null)
-  console.log('commentList', commentList)
 
   return (
     <div className='space-y-3'>

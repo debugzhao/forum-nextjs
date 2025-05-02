@@ -3,7 +3,6 @@ import Image from 'next/image'
 import { CommentWithUser, fetchCommentByPostId } from '@/prisma/db/comment'
 import dayjs from 'dayjs'
 import CommentCreateForm from './comment-create-form'
-import { th } from 'framer-motion/client'
 
 
 export default async function CommentShow({ comment }: { comment: CommentWithUser }) {

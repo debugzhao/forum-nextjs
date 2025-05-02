@@ -2,10 +2,7 @@
 import { auth } from '@/auth'
 import { prisma } from '@/prisma'
 import { findTopicByPostId } from '@/prisma/db/topics'
-import { Post } from '@prisma/client'
-import { th } from 'framer-motion/client'
 import { revalidatePath } from 'next/cache'
-import { redirect } from 'next/navigation'
 import { z } from 'zod' // 表单校验
 
 interface CreateCommentFormState {
@@ -77,7 +74,6 @@ export async function createComment(
   if (!topic) {
     throw new Error('topic not found')
   }
-  console.log('topic', topic)
 
   revalidatePath(`/topics/${topic.name}/posts/${postId}`)
 
